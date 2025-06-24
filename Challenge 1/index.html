@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulasi Cicilan Motor</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input, select, button { padding: 5px; margin: 5px 0; width: 220px; }
+    #hasil p { margin: 3px 0; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h2>Simulasi Cicilan Motor</h2>
+
+  <label>Harga Motor (Rp):</label><br>
+  <input type="number" id="hargaMotor" placeholder="Contoh: 15000000"><br>
+
+  <label>Uang Muka (DP) (Rp):</label><br>
+  <input type="number" id="dp" placeholder="Contoh: 5000000"><br>
+
+  <label>Tenor (bulan):</label><br>
+  <select id="tenor">
+    <option value="12">12 bulan</option>
+    <option value="24">24 bulan</option>
+    <option value="36">36 bulan</option>
+    <option value="48">48 bulan</option>
+  </select><br>
+
+  <label>Penghasilan per Bulan (Rp):</label><br>
+  <input type="number" id="penghasilan" placeholder="Contoh: 4000000"><br>
+
+  <button onclick="hitungCicilan()">Hitung Cicilan</button>
+
+  <h3>Hasil:</h3>
+  <div id="hasil"></div>
+
+  <script>
+    function hitungCicilan() {
+      const harga      = parseFloat(document.getElementById("hargaMotor").value);
+      const dp         = parseFloat(document.getElementById("dp").value);
+      const tenor      = parseInt(document.getElementById("tenor").value, 10);
+      const penghasilan= parseFloat(document.getElementById("penghasilan").value);
+      const hasilDiv   = document.getElementById("hasil");
+
+      // Validasi wajib angka
+      if (isNaN(harga) || isNaN(dp) || isNaN(penghasilan)) {
+        hasilDiv.innerHTML = "<p class='error'>Harga Motor, DP, dan Penghasilan harus diisi dengan angka.</p>";
+        return;
+      }
+
+      // Validasi DP minimal 30%
+      const dpMin = 0.3 * harga;
+      if (dp < dpMin) {
+        hasilDiv.innerHTML = "<p class='error'>DP minimal 30% dari harga motor.</p>";
+        return;
+      }
+
+      // Validasi penghasilan minimal 3 juta
+      if (penghasilan < 3000000) {
+        hasilDiv.innerHTML = "<p class='error'>Penghasilan minimal Rp 3.000.000.</p>";
+        return;
+      }
+
+      // Tentukan bunga sesuai tenor
+      let bungaRate;
+      switch(tenor) {
+        case 12: bungaRate = 5; break;
+        case 24: bungaRate = 8; break;
+        case 36: bungaRate = 10; break;
+        case 48: bungaRate = 12; break;
+        default: bungaRate = 0;
+      }
+
+      // Hitung pinjaman pokok
+      const pokok       = harga - dp;
+      // Bunga flat total = pokok × (bungaRate/100) × (tenor/12)
+      const bungaTotal  = pokok * (bungaRate / 100) * (tenor / 12);
+      // Total bayar = pokok + bunga
+      const totalBayar  = pokok + bungaTotal;
+      // Cicilan per bulan
+      const cicilanBulanan = totalBayar / tenor;
+
+      // Tampilkan hasil
+      hasilDiv.innerHTML = `
+        <p>Harga Motor: Rp ${harga.toLocaleString()}</p>
+        <p>DP: Rp ${dp.toLocaleString()}</p>
+        <p>Pokok Pinjaman: Rp ${pokok.toLocaleString()}</p>
+        <p>Tenor: ${tenor} bulan</p>
+        <p>Bunga per Tahun: ${bungaRate}%</p>
+        <p>Total Bunga (flat): Rp ${Math.round(bungaTotal).toLocaleString()}</p>
+        <p><strong>Total Bayar: Rp ${Math.round(totalBayar).toLocaleString()}</strong></p>
+        <p><strong>Cicilan per bulan: Rp ${Math.round(cicilanBulanan).toLocaleString()}</strong></p>
+      `;
+    }
+  </script>
+</body>
+</html>
