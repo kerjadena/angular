@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>❤️Dena Hasim❤️</title>
+  <link rel="stylesheet" href="styleporto.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="logo">Dena Hasim</div>
+
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav>
+        <ul>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#exp">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero container" id="hero">
+    <div class="hero-text">
+      <h1>Hi, I am Dena,<br/> Quality Assurance</h1>
+      <p>Quality Assurance Engineer with extensive experience in manual and automated testing, including User Acceptance Testing
+         (UAT). Skilled in developing and executing test plans, test cases, and scripts to ensure software quality and functionality.
+         Proven ability to collaborate with development teams to identify and resolve defects, delivering high-quality results.
+         Committed to continuous skill development and personal growth, with a strong enthusiasm for tackling new challenges.</p>
+      <a href="resume.pdf" class="btn">Download Resume</a>
+    </div>
+    <div class="hero-image">
+      <img src="profile.jpg" alt="Dena Hasim" />
+    </div>
+  </section>
+
+  <!-- RECENT POSTS -->
+  <section class="recent-posts" id="blog">
+    <div class="container">
+      <div class="section-header">
+        <h2>Recent posts</h2>
+        <a href="/blog" class="view-all">View all</a>
+      </div>
+      <div class="posts-grid">
+        <article class="post-card">
+          <h3>Building a ZK MVVM Application with Spring and JPA</h3>
+          <div class="meta">18 Jun 2025 | JAVA, ZKoss</div>
+          <p>In this project, I developed a full-stack student management application using ZKoss MVVM, defining ViewModels with
+             @Init, @Command, @NotifyChange for two-way binding, structured UI with ZUML and CSS flexbox, integrated Spring & JPA
+             back-end, and managed schema via Flyway on PostgreSQL, including client-side validation with Messagebox.</p>
+        </article>
+        <article class="post-card">
+          <h3>Doctor Appointment API with Spring Boot & PostgreSQL</h3>
+          <div class="meta">10 Jun 2025 | Java, Spring Boot</div>
+          <p>Built a RESTful appointment booking system: patients book doctors, doctors view appointments. Utilized JPA entities,
+             DTOs, and standard HTTP responses. Packaged into model, dto, repository, service, controller layers; tested via Postman.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCES -->
+  <section class="experience" id="exp">
+    <div class="container">
+      <h2>Experience</h2>
+      <ul class="exp-list">
+        <li class="exp-item">
+          <img src="fif.png" alt="FIFGROUP">
+          <div class="exp-info">
+            <h3>Data IT-Management Trainee</h3>
+            <div class="submeta"><span class="year">2025</span> <span class="tag">FIFGROUP</span></div>
+            <p>Accepted into the Data &amp; IT Management Trainee Program at FIFGROUP, specializing in Information Technology,
+               with intensive cross-functional training in system integration, IT operations, data management, and digital business.</p>
+          </div>
+        </li>
+        <li class="exp-item">
+          <img src="pvs.jpg" alt="Prima Vista Solusi">
+          <div class="exp-info">
+            <h3>Software Engineer – Quality Assurance</h3>
+            <div class="submeta"><span class="year">2024</span> <span class="tag">PT. Prima Vista Solusi</span></div>
+            <p>Performed manual and stress testing on EDC systems. Involved in SIT, UAT, and regression testing. Created and executed
+               test plans and cases. Collaborated with developers to verify bug fixes. Used Jira for issue tracking.</p>
+          </div>
+        </li>
+        <li class="exp-item">
+          <img src="mda.png" alt="My Digital Academy">
+          <div class="exp-info">
+            <h3>My Digital Academy-Awardee</h3>
+            <div class="submeta"><span class="year">2023</span> <span class="tag">Bank Mandiri</span></div>
+            <p>Selected as one of 600 awardees from over 24,000 applicants. Served as Product Manager on a team developing an
+               innovative application for the elderly.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAVORITE VIDEO -->
+  <section class="favorite-video container">
+    <h2>My Favorite Video</h2>
+    <div class="video-wrapper">
+      <iframe 
+        src="https://www.youtube.com/embed/n7kFRxFIPrI" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact-form container">
+    <h2>Give me your contact too!</h2>
+    <form action="#" method="POST">
+      <div class="form-row">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-row">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-row">
+        <button type="submit" class="btn">Submit</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container social">
+      <a href="https://instagram.com/denahasim" target="_blank" rel="noopener noreferrer">
+        <img src="instagram.png" alt="Instagram">
+      </a>
+      <a href="https://linkedin.com/in/denahasim" target="_blank" rel="noopener noreferrer">
+        <img src="linkedin.png" alt="LinkedIn">
+      </a>
+    </div>
+    <p>&copy; 2025 Dena Hasim. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
