@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Pengajuan Leasing & Simulasi Cicilan</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>1. Daftar Semua Pengajuan</h2>
+  <table id="tabelPengajuan">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Umur</th>
+        <th>DP</th>
+        <th>Harga Motor</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>2. Pengajuan dengan Umur 21–55</h2>
+  <table id="tabelFilter">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Umur</th>
+        <th>DP</th>
+        <th>Harga Motor</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>3. Simulasi Cicilan 12 Bulan</h2>
+  <p><em>Asumsi: DP 30%, bunga 10% p.a., tenor 12 bulan</em></p>
+  <table id="tabelCicilan">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Harga Motor</th>
+        <th>DP (30%)</th>
+        <th>Bunga</th>
+        <th>Cicilan/bln</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function tampilkanData() {
+      const res  = await fetch("https://68598a7a138a18086dfec989.mockapi.io/dummy-fif/DummyDataUser");
+      const data = await res.json();
+
+      const allTbody    = document.querySelector("#tabelPengajuan tbody");
+      const filterTbody = document.querySelector("#tabelFilter tbody");
+      const cicilTbody  = document.querySelector("#tabelCicilan tbody");
+
+      allTbody.innerHTML    = "";
+      filterTbody.innerHTML = "";
+      cicilTbody.innerHTML  = "";
+
+      // 1) Semua pengajuan (tanpa status)
+      data.forEach((p, i) => {
+        allTbody.innerHTML += `
+          <tr>
+            <td>${i+1}</td>
+            <td>${p.name}</td>
+            <td>${p.age}</td>
+            <td>Rp ${Number(p.dp).toLocaleString()}</td>
+            <td>Rp ${Number(p.price).toLocaleString()}</td>
+          </tr>`;
+      });
+
+      // 2) Filter umur 21–55
+      const byAge = data.filter(p =>
+        Number(p.age) >= 21 && Number(p.age) <= 55
+      );
+      byAge.forEach((p, i) => {
+        filterTbody.innerHTML += `
+          <tr>
+            <td>${i+1}</td>
+            <td>${p.name}</td>
+            <td>${p.age}</td>
+            <td>Rp ${Number(p.dp).toLocaleString()}</td>
+            <td>Rp ${Number(p.price).toLocaleString()}</td>
+          </tr>`;
+      });
+
+      // 3) Simulasi cicilan
+      byAge.forEach((p, i) => {
+        const harga    = Number(p.price);
+        const dp = Math.round(harga * 0.30);            // 30% DP
+        const pokok    = Math.round(harga - dp);
+        const bungaTot = Math.round(pokok * 0.10);           // 10% p.a. selama 1 tahun (tenor 12)
+        const total    = Math.round(pokok + bungaTot);
+        const cicilan  = Math.round(total / 12);
+
+        cicilTbody.innerHTML += `
+          <tr>
+            <td>${i+1}</td>
+            <td>${p.name}</td>
+            <td>Rp ${harga.toLocaleString()}</td>
+            <td>Rp ${dp.toLocaleString()}</td>
+            <td>Rp ${Math.round(bungaTot).toLocaleString()}</td>
+            <td>Rp ${Math.round(cicilan).toLocaleString()}</td>
+          </tr>`;
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", tampilkanData);
+  </script>
+
+</body>
+</html>
