@@ -1,0 +1,50 @@
+/* Modern pink style for table */
+table {
+  width: 90%;
+  margin: 2rem auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff0fa;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px 0 rgba(255, 0, 128, 0.08);
+  overflow: hidden;
+}
+thead tr {
+  background: linear-gradient(90deg, #ff7eb9 0%, #ff65a3 100%);
+}
+thead th {
+  color: #fff;
+  font-weight: bold;
+  padding: 1rem 0.7rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+tbody td {
+  padding: 0.8rem 0.7rem;
+  color: #d72660;
+  font-size: 1rem;
+  border-bottom: 1px solid #ffd6ef;
+}
+tbody tr:last-child td {
+  border-bottom: none;
+}
+tbody tr:hover {
+  background: #ffe0f7;
+  transition: background 0.2s;
+}
+td button {
+  background: linear-gradient(90deg, #ff65a3 0%, #d7268a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 128, 0.10);
+  transition: background 0.2s, transform 0.1s;
+}
+td button:hover {
+  background: linear-gradient(90deg, #d7268a 0%, #ff65a3 100%);
+  transform: scale(1.05);
+}

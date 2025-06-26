@@ -1,0 +1,56 @@
+/* Modern pink style for form input */
+.form-group {
+  background: #ffe0f7;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 4px 24px 0 rgba(255, 0, 128, 0.08);
+  max-width: 400px;
+  margin: 2rem auto 1rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-group label {
+  color: #ff65a3;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.form-group input {
+  border: 2px solid #ff7eb9;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  margin-bottom: 0.5rem;
+}
+.form-group input:focus {
+  border-color: #d72660;
+  background: #fff0fa;
+}
+.form-group button {
+  background: linear-gradient(90deg, #ff7eb9 0%, #ff65a3 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 128, 0.10);
+  transition: background 0.2s, transform 0.1s;
+}
+.form-group button:hover {
+  background: linear-gradient(90deg, #ff65a3 0%, #f5407c 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+.error {
+  color: #d72660;
+  background: #fff0fa;
+  border-left: 4px solid #ff65a3;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
