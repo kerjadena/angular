@@ -1,0 +1,16 @@
+<!-- Child 2: Form Input + Button -->
+<form class="form-group" (ngSubmit)="submit(f)" #f="ngForm">
+  <label>Nama:</label>
+  <input [(ngModel)]="nama" name="nama" required minlength="3" placeholder="Nama" #namaInput="ngModel" />
+  <div *ngIf="namaInput.invalid && (namaInput.touched || namaInput.dirty)" class="error">Nama wajib diisi (min 3 karakter)</div>
+
+  <label>Umur:</label>
+  <input type="number" [(ngModel)]="umur" name="umur" required min="1" placeholder="Umur" #umurInput="ngModel" />
+  <div *ngIf="umurInput.invalid && (umurInput.touched || umurInput.dirty)" class="error">Umur wajib diisi &gt; 0</div>
+
+  <label>Job:</label>
+  <input [(ngModel)]="job" name="job" required minlength="2" placeholder="Pekerjaan" #jobInput="ngModel" />
+  <div *ngIf="jobInput.invalid && (jobInput.touched || jobInput.dirty)" class="error">Pekerjaan wajib diisi (min 2 karakter)</div>
+
+  <button type="submit" [disabled]="f.invalid">Add</button>
+</form>
