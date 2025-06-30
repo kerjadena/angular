@@ -11,16 +11,16 @@ import { Creditur } from '../../../model/creditur.interface';
   styleUrl: './form.scss'
 })
 export class FormComponent {
-  @Output() addCreditur = new EventEmitter<Creditur>();
+  @Output() addCreditur = new EventEmitter<Omit<Creditur,'id'>>();
   nama = '';
   umur: number | null = null;
   job = '';
 
   submit(form?: any) {
     if (
-      this.nama && this.nama.length >= 3 &&
+      this.nama.length >= 3 &&
       this.umur !== null && this.umur > 0 &&
-      this.job && this.job.length >= 2
+      this.job.length >= 2
     ) {
       this.addCreditur.emit({ name: this.nama, age: this.umur, job: this.job });
       this.nama = '';

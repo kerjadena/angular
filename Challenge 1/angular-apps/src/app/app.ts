@@ -1,53 +1,53 @@
-import { Component } from '@angular/core';
-import { Creditur } from '../model/creditur.interface';
-import { TableComponent } from './share/table/table';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { FormComponent } from './share/form/form';
+import { FormsModule }  from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { KrediturService } from './services/kreditur.service';
+import { FormComponent }   from './share/form/form';
+import { TableComponent }  from './share/table/table';
+import { Creditur } from '../model/creditur.interface';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, TableComponent, FormComponent, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    FormComponent,
+    TableComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class AppComponent {
-  parentData: Creditur[] = [
-    {
-      name: "Dr. Levi Russel",
-      age: 96,
-      job: "Direct Data Producer",
-    },
-    {
-      name: "Jimmy Gusikowski",
-      age: 59,
-      job: "Chief Quality Supervisor",
-    },
-    {
-      name: "Johen",
-      age: 49,
-      job: "-"
-    }
-  ];
-  inputNama: string = '';
-  inputUmur: number|null = null;
-  inputJob: string = '';
+export class AppComponent implements OnInit {
+  parentData: Creditur[] = [];
+  inputNama = '';
+  inputUmur: number | null = null;
+  inputJob = '';
 
-  addData() {
-    if (this.inputNama && this.inputUmur !== null && this.inputJob) {
-      this.parentData.push({ name: this.inputNama, age: this.inputUmur, job: this.inputJob });
-      this.inputNama = '';
-      this.inputUmur = null;
-      this.inputJob = '';
-    }
+  constructor(private krediturService: KrediturService) {}
+
+  ngOnInit() {
+    this.loadData();
+  }
+
+  private loadData() {
+    this.krediturService.getAll()
+      .subscribe(data => this.parentData = data);
+  }
+
+  addCreditur(payload: Omit<Creditur,'id'>) {
+    this.krediturService.create(payload)
+      .subscribe(newItem => this.parentData.push(newItem));
   }
 
   deleteData(idx: number) {
-    this.parentData.splice(idx, 1);
-  }
-
-  addCreditur(creditur: Creditur) {
-    this.parentData.push(creditur);
+    const item = this.parentData[idx];
+    if (item.id) {
+      this.krediturService.delete(item.id)
+        .subscribe(() => this.parentData.splice(idx, 1));
+    }
   }
 }
